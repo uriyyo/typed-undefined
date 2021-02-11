@@ -35,7 +35,7 @@ class _UndefinedMeta(type):
 
     def __call__(cls, *args: Any, **kwargs: Any) -> Any:
         if args or kwargs:
-            raise TypeError("_Undefined does not accept args and kwargs")
+            raise TypeError("Undefined does not accept args and kwargs")
 
         if cls.__instance__ is None:
             cls.__instance__ = super().__call__()
@@ -45,6 +45,7 @@ class _UndefinedMeta(type):
 
 @final
 class _Undefined(metaclass=_UndefinedMeta):
+    __name__ = "Undefined"
     __qualname__ = "Undefined"
 
     def __bool__(self) -> bool:
@@ -62,7 +63,7 @@ class _Undefined(metaclass=_UndefinedMeta):
 
 undefined = _Undefined()
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     Undefined = Union[_Undefined, T]
 else:
     Undefined = _Undefined
