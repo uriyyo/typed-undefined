@@ -21,10 +21,10 @@ class _UndefinedMeta(type):
     __instance__: Optional[_Undefined] = None
 
     def __new__(
-            mcs,
-            name: str,
-            bases: Tuple[Type, ...],
-            namespace: Dict[str, Any],
+        mcs,
+        name: str,
+        bases: Tuple[Type, ...],
+        namespace: Dict[str, Any],
     ) -> Any:
         try:
             _ = _Undefined  # check if undefined is defined
@@ -38,26 +38,26 @@ class _UndefinedMeta(type):
             raise TypeError("_Undefined does not accept args and kwargs")
 
         if cls.__instance__ is None:
-            cls.__instance__ = super().__call__(*args, **kwargs)
+            cls.__instance__ = super().__call__()
 
         return cls.__instance__
 
 
 @final
 class _Undefined(metaclass=_UndefinedMeta):
-    __qualname__ = 'Undefined'
+    __qualname__ = "Undefined"
 
     def __bool__(self) -> bool:
         return False
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return "Undefined()"
 
     def __str__(self) -> str:
         return "undefined"
 
     def __class_getitem__(cls, item: T) -> Undefined[T]:
-        return cast(Union[_Undefined, T], Union[cls, item])  # type: ignore
+        return cast(Union[_Undefined, T], Union[cls, item])
 
 
 undefined = _Undefined()
