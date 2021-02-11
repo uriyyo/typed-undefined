@@ -5,6 +5,19 @@ description = "typed undefined"
 authors = ["Yurii Karabas <1998uriyyo@gmail.com>"]
 license = "MIT"
 
+readme = "README.md"
+repository = "https://github.com/uriyyo/typed-undefined"
+
+classifiers = [
+    'Operating System :: OS Independent',
+    'Programming Language :: Python',
+    'Programming Language :: Python :: 3',
+    'Programming Language :: Python :: 3.7',
+    'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3 :: Only',
+]
+
 [tool.poetry.dependencies]
 python = "^3.7"
 typing-extensions = "^3.7.4"
