@@ -10,6 +10,7 @@ from typing import (
     TypeVar,
     Union,
     cast,
+    no_type_check,
 )
 
 from typing_extensions import final
@@ -18,7 +19,7 @@ T = TypeVar("T")
 
 
 class _UndefinedMeta(type):
-    __instance__: Optional[_Undefined] = None
+    __instance__: Optional[Undefined] = None
 
     def __new__(
         mcs,
@@ -27,7 +28,7 @@ class _UndefinedMeta(type):
         namespace: Dict[str, Any],
     ) -> Any:
         try:
-            _ = _Undefined  # check if undefined is defined
+            _ = Undefined  # check if undefined is defined
         except NameError:
             return super().__new__(mcs, name, bases, namespace)
 
@@ -44,7 +45,7 @@ class _UndefinedMeta(type):
 
 
 @final
-class _Undefined(metaclass=_UndefinedMeta):
+class Undefined(metaclass=_UndefinedMeta):
     __name__ = "Undefined"
     __qualname__ = "Undefined"
 
@@ -57,16 +58,19 @@ class _Undefined(metaclass=_UndefinedMeta):
     def __str__(self) -> str:
         return "undefined"
 
-    def __class_getitem__(cls, item: T) -> Undefined[T]:
-        return cast(Union[_Undefined, T], Union[cls, item])
+    @no_type_check
+    def __class_getitem__(cls, item: T) -> Any:
+        if not isinstance(item, tuple):
+            item = (item,)
+
+        return Union[(cls, *item)]
 
 
-undefined = _Undefined()
+undefined = Undefined()
 
 if TYPE_CHECKING:  # pragma: no cover
-    Undefined = Union[_Undefined, T]
-else:
-    Undefined = _Undefined
+    _Undefined = Undefined
+    Undefined = Union[_Undefined, T]  # type: ignore
 
 
 def resolve(val: Undefined[T], default: T) -> T:

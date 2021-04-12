@@ -22,8 +22,11 @@ repos:
         additional_dependencies:
           - flake8-bugbear
 
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v0.800
+  - repo: local
     hooks:
       - id: mypy
+        name: mypy
+        entry: poetry run mypy
         exclude: test_undefined.py
+        types: [ python ]
+        language: system

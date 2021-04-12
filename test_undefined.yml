@@ -2,20 +2,29 @@
   main: |
     from undefined import Undefined, undefined
 
-    a: Undefined[int] = undefined
-    b: Undefined[int] = 2
-    c: Undefined[int] = 2.0
+    a1: Undefined = undefined
+    a2: Undefined[int] = undefined
+    a3: Undefined[int] = 2
+
+    a4: Undefined[int, float] = undefined
+    a5: Undefined[int, float] = 2
+    a6: Undefined[int, float] = 2.0
+
+    a7: Undefined[int, float] = ""
+    a8: Undefined[int] = 2.0
+    a9: Undefined = 2
   out: |
-     main:5:21: error: Incompatible types in assignment (expression has type "float", variable has type "Union[_Undefined, int]")
+     main:11:29: error: Incompatible types in assignment (expression has type "str", variable has type "Union[Undefined, int, float]")
+     main:12:22: error: Incompatible types in assignment (expression has type "float", variable has type "Union[Undefined, int]")
+     main:13:17: error: Incompatible types in assignment (expression has type "int", variable has type "Undefined")
 
 - case: undefined_resolve
   main: |
     from undefined import Undefined, undefined, resolve
 
-    def foo(a: Undefined[int] = undefined) -> int:
-        return resolve(a, 10)
+    a: Undefined[int] = undefined
 
-    a: int = foo(1)
-    foo(0.1)
+    a1: int = resolve(a, 10)
+    a2: int = resolve(a, 0.1)
   out: |
-     main:7:5: error: Argument 1 to "foo" has incompatible type "float"; expected "Union[_Undefined, int]"
+     main:6:11: error: Incompatible types in assignment (expression has type "float", variable has type "int")
