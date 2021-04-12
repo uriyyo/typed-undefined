@@ -11,7 +11,7 @@ def test_singleton():
 
 
 def test_subclass():
-    with raises(RuntimeError, match="^Can't subclass _Undefined$"):
+    with raises(RuntimeError, match="^Can't subclass Undefined$"):
 
         class _UndefinedSubclass(Undefined):
             pass

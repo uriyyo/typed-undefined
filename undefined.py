@@ -31,7 +31,7 @@ class _UndefinedMeta(type):
         except NameError:
             return super().__new__(mcs, name, bases, namespace)
 
-        raise RuntimeError("Can't subclass _Undefined")
+        raise RuntimeError("Can't subclass Undefined")
 
     def __call__(cls, *args: Any, **kwargs: Any) -> Any:
         if args or kwargs:

@@ -1,0 +1,21 @@
+- case: undefined_assignment
+  main: |
+    from undefined import Undefined, undefined
+
+    a: Undefined[int] = undefined
+    b: Undefined[int] = 2
+    c: Undefined[int] = 2.0
+  out: |
+     main:5:21: error: Incompatible types in assignment (expression has type "float", variable has type "Union[_Undefined, int]")
+
+- case: undefined_resolve
+  main: |
+    from undefined import Undefined, undefined, resolve
+
+    def foo(a: Undefined[int] = undefined) -> int:
+        return resolve(a, 10)
+
+    a: int = foo(1)
+    foo(0.1)
+  out: |
+     main:7:5: error: Argument 1 to "foo" has incompatible type "float"; expected "Union[_Undefined, int]"
