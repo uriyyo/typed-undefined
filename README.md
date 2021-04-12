@@ -21,7 +21,7 @@ b: Undefined[int] = 0.5  # error
 
 You should add `undefined_mypy` to list of mypy plugins:
 
-```toml
+```buildoutcfg
 [mypy]
 plugins = undefined_mypy
 ```
