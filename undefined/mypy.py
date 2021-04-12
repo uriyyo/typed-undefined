@@ -13,12 +13,8 @@ class CustomPlugin(Plugin):
 
 
 def undefined_type_hook(ctx: AnalyzeTypeContext) -> Type:
-    undefined_type = ctx.api.named_type("undefined.Undefined", [])
-
-    if not ctx.type.args:
-        return ctx.api.analyze_type(undefined_type)
-
-    return ctx.api.analyze_type(UnionType([undefined_type, *ctx.type.args]))
+    args = [ctx.api.named_type("undefined.Undefined", []), *ctx.type.args]
+    return ctx.api.analyze_type(UnionType.make_union(args))
 
 
 def plugin(version: str) -> Any:

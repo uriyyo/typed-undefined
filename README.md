@@ -23,5 +23,5 @@ You should add `undefined_mypy` to list of mypy plugins:
 
 ```buildoutcfg
 [mypy]
-plugins = undefined_mypy
+plugins = undefined.mypy
 ```

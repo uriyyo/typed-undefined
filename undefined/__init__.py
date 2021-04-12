@@ -75,8 +75,7 @@ class Undefined(metaclass=_UndefinedMeta):
 undefined = Undefined()
 
 if TYPE_CHECKING:  # pragma: no cover
-    _Undefined = Undefined
-    Undefined = Union[_Undefined, T]  # type: ignore
+    Undefined = Union[Undefined, T]  # type: ignore
 
 
 def resolve(val: Undefined[T], default: T) -> T:

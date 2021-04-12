@@ -27,6 +27,6 @@ repos:
       - id: mypy
         name: mypy
         entry: poetry run mypy
-        exclude: test_undefined.py
+        exclude: tests/
         types: [ python ]
         language: system
