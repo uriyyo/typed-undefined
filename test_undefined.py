@@ -1,3 +1,5 @@
+import pickle
+from copy import copy, deepcopy
 from typing import Union
 
 from pytest import mark, raises
@@ -24,6 +26,12 @@ def test_is_false():
 def test_repr_str():
     assert str(undefined) == "undefined"
     assert repr(undefined) == "Undefined()"
+
+
+def test_copy_deepcopy_pickle():
+    assert copy(undefined) is undefined
+    assert deepcopy(undefined) is undefined
+    assert pickle.loads(pickle.dumps(undefined)) is undefined
 
 
 @mark.parametrize(

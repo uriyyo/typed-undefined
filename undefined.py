@@ -46,9 +46,6 @@ class _UndefinedMeta(type):
 
 @final
 class Undefined(metaclass=_UndefinedMeta):
-    __name__ = "Undefined"
-    __qualname__ = "Undefined"
-
     def __bool__(self) -> bool:
         return False
 
@@ -57,6 +54,15 @@ class Undefined(metaclass=_UndefinedMeta):
 
     def __str__(self) -> str:
         return "undefined"
+
+    def __copy__(self: T) -> T:
+        return self
+
+    def __reduce__(self) -> str:
+        return "undefined"
+
+    def __deepcopy__(self: T, _: Any) -> T:
+        return self
 
     @no_type_check
     def __class_getitem__(cls, item: T) -> Any:
