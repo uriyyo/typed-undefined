@@ -46,6 +46,7 @@ def test_singleton_args_kwargs(args, kwargs):
 
 def test_singleton_getitem():
     assert Undefined[int] == Union[Undefined, int]
+    assert Undefined[int, float] == Union[Undefined, int, float]
     assert Undefined[Union[int, float]] == Union[Undefined, int, float]
 
 
