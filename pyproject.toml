@@ -8,6 +8,10 @@ license = "MIT"
 readme = "README.md"
 repository = "https://github.com/uriyyo/typed-undefined"
 
+packages = [
+    { include = "undefined" },
+]
+
 classifiers = [
     'Operating System :: OS Independent',
     'Programming Language :: Python',
