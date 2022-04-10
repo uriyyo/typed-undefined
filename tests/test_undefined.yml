@@ -28,3 +28,14 @@
     a2: int = resolve(a, 0.1)
   out: |
      main:6:11: error: Incompatible types in assignment (expression has type "float", variable has type "int")
+
+- case: is_undefined
+  main: |
+    from undefined import Undefined, undefined, is_undefined
+
+    a: Undefined[int] = undefined
+
+    if is_undefined(a):
+        reveal_type(a)
+  out: |
+     main:6:17: note: Revealed type is "undefined.Undefined"

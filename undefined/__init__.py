@@ -13,7 +13,7 @@ from typing import (
     no_type_check,
 )
 
-from typing_extensions import final
+from typing_extensions import TypeGuard, final
 
 T = TypeVar("T")
 
@@ -74,6 +74,11 @@ class Undefined(metaclass=_UndefinedMeta):
 
 undefined = Undefined()
 
+
+def is_undefined(val: Any) -> TypeGuard[Undefined]:
+    return val is undefined
+
+
 if TYPE_CHECKING:  # pragma: no cover
     Undefined = Union[Undefined, T]  # type: ignore
 
@@ -83,6 +88,7 @@ def resolve(val: Undefined[T], default: T) -> T:
 
 
 __all__ = [
+    "is_undefined",
     "resolve",
     "undefined",
     "Undefined",
