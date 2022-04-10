@@ -4,7 +4,7 @@ from typing import Union
 
 from pytest import mark, raises
 
-from undefined import Undefined, resolve, undefined
+from undefined import Undefined, is_undefined, resolve, undefined
 
 
 def test_singleton():
@@ -71,3 +71,18 @@ def test_singleton_getitem():
 )
 def test_resolve(value, default, expected):
     assert resolve(value, default) == expected
+
+
+@mark.parametrize(
+    "value,expected",
+    [
+        (undefined, True),
+        (1, False),
+    ],
+    ids=[
+        "undefined",
+        "non-undefined",
+    ],
+)
+def test_is_undefined(value, expected):
+    assert is_undefined(value) == expected
