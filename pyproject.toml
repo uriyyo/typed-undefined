@@ -19,19 +19,20 @@ classifiers = [
     'Programming Language :: Python :: 3.7',
     'Programming Language :: Python :: 3.8',
     'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
     'Programming Language :: Python :: 3 :: Only',
 ]
 
 [tool.poetry.dependencies]
 python = "^3.7"
-typing-extensions = ">= 3.7.4, < 5.0"
+typing-extensions = "^4.1.1"
 
 [tool.poetry.dev-dependencies]
-mypy = "^0.812"
-pytest = "^6.2.3"
-pytest-cov = "^2.11.1"
-pre-commit = "^2.12.0"
-pytest-mypy-plugins = "^1.6.1"
+mypy = "^0.942"
+pytest = "^7.1.1"
+pytest-cov = "^3.0.0"
+pre-commit = "^2.18.1"
+pytest-mypy-plugins = "^1.9.3"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
